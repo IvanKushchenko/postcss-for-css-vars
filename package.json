@@ -1,39 +1,20 @@
 {
-  "name": "${pluginName}",
-  "version": "0.0.0",
-  "description": "PostCSS plugin ${description}",
-  "keywords": ["postcss", "css", "postcss-plugin", "${pluginName}"],
+  "name": "postcss-for-var",
+  "version": "1.0.0",
+  "description": "PostCSS plugin that enables @for loop syntax in your CSS with css variables",
+  "keywords": ["postcss", "css", "postcss-plugin", "postcss-for-var", "for", "loop", "iterate", "sass"],
   "scripts": {
     "test": "jest"
   },
-  "author": "${authorName} <${authorEmail}>",
+  "author": "Ivan Kushchenko <kushhenko-ivan@yandex.ru>",
   "license": "MIT",
-  "repository": "${gitHubName}/${pluginName}",
-  "engines": {
-    "node": ">=12.0.0"
-  },
+  "repository": "IvanKushchenko/postcss-for-var",
   "peerDependencies": {
     "postcss": "^8.3.0"
   },
   "devDependencies": {
-    "clean-publish": "^3.4.2",
-    "eslint": "^8.0.1",
-    "eslint-plugin-jest": "^25.2.2",
     "jest": "^27.3.1",
     "postcss": "^8.3.11"
-  },
-  "eslintConfig": {
-    "parserOptions": {
-      "ecmaVersion": 2022
-    },
-    "env": {
-      "node": true,
-      "es6": true
-    },
-    "extends": ["eslint:recommended", "plugin:jest/recommended"],
-    "rules": {
-      "jest/expect-expect": "off"
-    }
   },
   "jest": {
     "coverageThreshold": {
