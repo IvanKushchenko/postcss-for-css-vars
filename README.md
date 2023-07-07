@@ -29,3 +29,7 @@ postcss([ require('postcss-for-var') ])
 This plugin must be set after [postcss-nested] and before [postcss-css-variables]/[postcss-custom-properties].
 
 See PostCSS docs for examples for your environment.
+
+[postcss-nested]: https://github.com/postcss/postcss-nested
+[postcss-css-variables]: https://github.com/MadLittleMods/postcss-css-variables
+[postcss-custom-properties]: https://github.com/postcss/postcss-custom-properties
