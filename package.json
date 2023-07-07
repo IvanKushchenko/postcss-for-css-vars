@@ -1,14 +1,14 @@
 {
-  "name": "postcss-for-var",
+  "name": "postcss-for-css-vars",
   "version": "1.0.0",
   "description": "PostCSS plugin that enables @for loop syntax in your CSS with css variables",
-  "keywords": ["postcss", "css", "postcss-plugin", "postcss-for-var", "for", "loop", "iterate", "sass"],
+  "keywords": ["postcss", "css", "postcss-plugin", "postcss-for-css-vars", "for", "loop", "iterate", "sass"],
   "scripts": {
     "test": "jest"
   },
   "author": "Ivan Kushchenko <kushhenko-ivan@yandex.ru>",
   "license": "MIT",
-  "repository": "IvanKushchenko/postcss-for-var",
+  "repository": "IvanKushchenko/postcss-for-css-vars",
   "peerDependencies": {
     "postcss": "^8.3.0"
   },

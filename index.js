@@ -3,10 +3,10 @@ const checkNumber = function (rule) {
         if (isNaN(parseInt(param))) {
             if (param.indexOf('--') !== -1) {
                 if( !parentsHaveIterator(rule, param) ) {
-                    throw rule.error('External variable (not from a parent for loop) cannot be used as a range parameter', { plugin: 'postcss-for-var' });
+                    throw rule.error('External variable (not from a parent for loop) cannot be used as a range parameter', { plugin: 'postcss-for-css-vars' });
                 }
             } else {
-                throw rule.error('Range parameter should be a number', { plugin: 'postcss-for-var' });
+                throw rule.error('Range parameter should be a number', { plugin: 'postcss-for-css-vars' });
             }
         }
     };
@@ -17,7 +17,7 @@ const checkParams = function (rule, params) {
     if (!params[0].match(/\-\-([\w\d-_]+)/) ||
          params[1] !== 'from' ||
          params[3] !== 'to' ) {
-        throw rule.error('Wrong loop syntax', { plugin: 'postcss-for-var' });
+        throw rule.error('Wrong loop syntax', { plugin: 'postcss-for-css-vars' });
     }
 
     [params[2], params[4]].forEach(checkNumber(rule));
@@ -25,7 +25,7 @@ const checkParams = function (rule, params) {
 
 module.exports = () => {
   return {
-    postcssPlugin: 'postcss-for-var',
+    postcssPlugin: 'postcss-for-css-vars',
     prepare () {
       return {
         Once(root) {

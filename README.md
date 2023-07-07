@@ -5,7 +5,7 @@
 ## Usage
 
 ```js
-postcss([ require('postcss-for-var') ])
+postcss([ require('postcss-for-css-vars') ])
 ```
 
 ```css

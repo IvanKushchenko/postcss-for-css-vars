@@ -5,7 +5,7 @@ function run (input, output, opts = { }) {
   expect(postcss([plugin(opts)]).process(input).css).toEqual(output);
 }
 
-describe('postcss-for-var', () => {
+describe('postcss-for-css-vars', () => {
 
   it('iterates from and to', () => {
     run(
