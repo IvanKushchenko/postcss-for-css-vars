@@ -26,8 +26,8 @@ const checkParams = function (rule, params) {
 const loop = function(nodes, root) {
   nodes.forEach((rule, index) => {
 
-    if(rule.nodes.length && rule.type === "atrule" && rule.name !== "for") return loop(rule.nodes, root);
-
+    if(rule.nodes && rule.nodes.length && rule.type === "atrule" && rule.name !== "for") return loop(rule.nodes, root);
+    if(rule.name !== "for") return;
     const params = rule.params.split(/\s/);
 
     checkParams(rule, params);
