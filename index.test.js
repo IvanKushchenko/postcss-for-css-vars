@@ -14,6 +14,13 @@ describe('postcss-for-css-vars', () => {
     )
   })
 
+  it('iterates from and to in media queries', () => {
+    run(
+      `@media (max-width: 1200px) { @for --i from 1 to 3 { .b-var(--i) { width: var(--i)px; } } }`,
+      `@media (max-width: 1200px) { .b-1 { width: 1px; } .b-2 { width: 2px; } .b-3 { width: 3px; } }`
+    )
+  })
+
   it('it throws an error on wrong syntax', () => {
     expect(function () {
       run(

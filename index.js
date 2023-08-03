@@ -23,6 +23,33 @@ const checkParams = function (rule, params) {
     [params[2], params[4]].forEach(checkNumber(rule));
 };
 
+const loop = function(nodes, root) {
+  nodes.forEach((rule, index) => {
+
+    if(rule.nodes.length && rule.type === "atrule" && rule.name !== "for") return loop(rule.nodes, root);
+
+    const params = rule.params.split(/\s/);
+
+    checkParams(rule, params);
+
+    const variable = params[0];
+    const from = params[2];
+    const to = params[4];
+
+    for ( let i = from; i <= to; i++ ) {
+      const content = rule.clone();
+      content.nodes[0].nodes.forEach(node => {
+        node.value = node.value.replace(`var(${variable})`, i);
+        node.parent.selector = node.parent.selector.replace(`var(${variable})`, i);
+      })
+
+      rule.parent.insertBefore(rule, content.nodes[0]);
+    }
+
+    if(rule.parent) rule.remove();
+  })
+}
+
 module.exports = () => {
   return {
     postcssPlugin: 'postcss-for-css-vars',
@@ -30,28 +57,7 @@ module.exports = () => {
       return {
         Once(root) {
           const nodes = [...root.nodes];
-
-          nodes.forEach((rule, index) => {
-            if(rule.name !== 'for') return;
-            const params = rule.params.split(/\s/);
-
-            checkParams(rule, params);
-
-            const variable = params[0];
-            const from = params[2];
-            const to = params[4];
-
-            for ( let i = from; i <= to; i++ ) {
-              const content = rule.clone();
-              content.nodes[0].nodes.forEach(node => {
-                node.value = node.value.replace(`var(${variable})`, i);
-                node.parent.selector = node.parent.selector.replace(`var(${variable})`, i);
-              })
-              root.insertBefore(rule, content.nodes[0]);
-            }
-
-            if(rule.parent) rule.remove();
-          })
+          loop(nodes, root);
         }
       }
     }
