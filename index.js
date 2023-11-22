@@ -24,7 +24,7 @@ const checkParams = function (rule, params) {
 };
 
 const loop = function(nodes, root) {
-  nodes.forEach((rule, index) => {
+  [...nodes].forEach((rule, index) => {
 
     if(rule.nodes && rule.nodes.length && rule.type === "atrule" && rule.name !== "for") return loop(rule.nodes, root);
     if(rule.name !== "for") return;
@@ -38,12 +38,13 @@ const loop = function(nodes, root) {
 
     for ( let i = from; i <= to; i++ ) {
       const content = rule.clone();
-      content.nodes[0].nodes.forEach(node => {
-        node.value = node.value.replace(`var(${variable})`, i);
-        node.parent.selector = node.parent.selector.replace(`var(${variable})`, i);
+      content.nodes.forEach(rule => {
+        rule.nodes.forEach(node => {
+          node.value = node.value.replace(`var(${variable})`, i);
+          node.parent.selector = node.parent.selector.replace(`var(${variable})`, i);
+        });
       })
-
-      rule.parent.insertBefore(rule, content.nodes[0]);
+      rule.parent.append(content.nodes);
     }
 
     if(rule.parent) rule.remove();

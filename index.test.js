@@ -10,7 +10,7 @@ describe('postcss-for-css-vars', () => {
   it('iterates from and to', () => {
     run(
       `@for --i from 1 to 3 { .b-var(--i) { width: var(--i)px; } }`,
-      ` .b-1 { width: 1px; }\n.b-2 { width: 2px; }\n.b-3 { width: 3px; }`
+      `.b-1 { width: 1px; } .b-2 { width: 2px; } .b-3 { width: 3px; }`
     )
   })
 
@@ -18,6 +18,13 @@ describe('postcss-for-css-vars', () => {
     run(
       `@media (max-width: 1200px) { @for --i from 1 to 3 { .b-var(--i) { width: var(--i)px; } } }`,
       `@media (max-width: 1200px) { .b-1 { width: 1px; } .b-2 { width: 2px; } .b-3 { width: 3px; } }`
+    )
+  })
+
+  it('iterates from and to with multiple rules in loop', () => {
+    run(
+      `@media (max-width: 1200px) { @for --i from 1 to 2 { .b-var(--i) { width: var(--i)px; } .c-var(--i) { width: var(--i)px; } } }`,
+      `@media (max-width: 1200px) { .b-1 { width: 1px; } .c-1 { width: 1px; } .b-2 { width: 2px; } .c-2 { width: 2px; } }`
     )
   })
 
