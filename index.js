@@ -44,7 +44,7 @@ const loop = function(nodes, root) {
           node.parent.selector = node.parent.selector.replace(`var(${variable})`, i);
         });
       })
-      rule.parent.append(content.nodes);
+      rule.parent.prepend(content.nodes);
     }
 
     if(rule.parent) rule.remove();
