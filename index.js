@@ -36,19 +36,16 @@ const loop = function(nodes, root) {
     const from = params[2];
     const to = params[4];
 
-    for ( let i = from; i <= to; i++ ) {
-      const content = rule.clone();
-      content.nodes.forEach(rule => {
-        rule.nodes.forEach(node => {
-          node.value = node.value.replace(`var(${variable})`, i);
-          node.parent.selector = node.parent.selector.replace(`var(${variable})`, i);
-        });
-      })
-      rule.parent.prepend(content.nodes);
-    }
-
-    if(rule.parent) rule.remove();
-  })
+    rule.nodes.forEach(rule => {
+      for ( let i = from; i <= to; i++ ) {
+        const clone = rule.clone();
+        clone.selector = clone.selector.replace(`var(${variable})`, i);
+        clone.nodes.forEach(node => node.value = node.value.replace(`var(${variable})`, i));
+        rule.parent.parent.insertBefore(rule.parent, clone);
+      }
+    });
+    rule.remove();
+  });
 }
 
 module.exports = () => {
